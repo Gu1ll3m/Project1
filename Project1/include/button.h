@@ -8,6 +8,7 @@
 #ifndef BUTTON_H_
 #define BUTTON_H_
 
-
+int readbutton(int pin);
+unsigned char readkey();
 
 #endif /* BUTTON_H_ */
