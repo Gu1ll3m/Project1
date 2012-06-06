@@ -3,7 +3,7 @@
 #include <util/delay.h>
 // Farid added comment
 int readbutton(int pin){
-	//DDRE &= ~(1<<pin); // set button pin as input
+	DDRE &= ~(1<<pin); // set button pin as input
 	int bit = PINE & (1<<pin);
 	return bit;
 }
