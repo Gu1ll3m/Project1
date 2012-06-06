@@ -10,6 +10,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <avr/interrupt.h>
+#include <avr/io.h>
+#include <util/delay.h>
+
 
 // Robitis API
 #include "serial.h"
@@ -19,10 +23,9 @@
 //#include "dxl_hal.h"
 
 // OUR API
-//#include "button.h"
+#include "adc.h"
+#include "button.h"
 //#include "led.h"
-//#include "pc.h"
-//#include "adc.h"
 //#include "irlong.h"
 //#include "irshort.h"
 //#include "touch.h"
@@ -31,7 +34,25 @@
 
 
 int main(void) {
+	int value, butt;
+	unsigned char Data;
 
+	serial_initialize(57600);				// USART Initialize
+	adc_init();
 
+	while(1){
+		butt = readbutton(4);
+		Data = readkey();
+
+		if(Data == 'u'){
+			value = adc(2);
+			printf("%d\r\n", value);
+		}
+		else if(Data == 'd'){
+			printf("Hello");
+		}
+
+		_delay_ms(500);
+	}
 	return 0;
 }

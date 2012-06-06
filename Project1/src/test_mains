@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Main prog to get sensor data when pressing a button
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+int main(void) {
+	int value, butt;
+	serial_initialize(57600);				// USART Initialize
+	adc_init();
+
+	while(1){
+		butt = readbutton(4);
+		if (butt == 0){
+			value = adc(2);
+			printf("%d\r\n", value);
+		}
+		_delay_ms(1000);
+	}
+	return 0;
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
