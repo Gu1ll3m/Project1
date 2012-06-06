@@ -6,7 +6,5 @@
 int readbutton(int pin){
 	DDRE &= ~(1<<pin); // set button pin as input
 	int bit = PINE & (1<<pin);
-	DDRE &= ~(1<<pin); // set button pin as input
-	bit = PINE & (1<<pin);
 	return bit;
 }
