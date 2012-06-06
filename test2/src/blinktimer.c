@@ -19,7 +19,6 @@ void blinktimer() {
 	TCNT1 = 0; 							//reset timer/counter 1
 	sei(); 								//Enables global interrupts
 	while(1) {}
-	return 0;
 }
 
 ISR(TIMER1_COMPA_vect) {

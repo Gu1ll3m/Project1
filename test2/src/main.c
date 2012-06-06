@@ -7,6 +7,7 @@
  Description : Hello World in C, Ansi-style
  ============================================================================
  */
+#define F_CPU 16000000UL // CM-510 runs at 16 MHz.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +15,7 @@
 #include "blink.h"
 #include "manblink.h"
 #include "blinktimer.h"
+#include "gserialtest.h"
 
 int main(void) {
 	//cm510_init();
@@ -29,7 +31,8 @@ int main(void) {
 	//manblink();
 
 	// Timer controlled LEDs
-	blinktimer();
+	//blinktimer();
 
+	gserialtest();
 	return 0;
 }

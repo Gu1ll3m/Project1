@@ -10,14 +10,14 @@
 #include <avr/interrupt.h>
 #include "serial.h"
 
-int main(void)
+void gserialtest(void)
 {
 	int Value = 0;
 
 	serial_initialize(57600);				// USART Initialize
 	sei();
 
-	printf( "\n\nSerial Comm. example for CM-510\n\n" );
+	printf( "\n\n Serial Comm. Hello World 231" );
 
 	while (1)
 	{
@@ -29,6 +29,6 @@ int main(void)
 
 		printf("%d\r\n", Value);
 	}
-	return 1;
+	//return 1;
 }
 

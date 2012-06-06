@@ -32,5 +32,5 @@ void manblink(void){
 		}
 		_delay_ms(100); // wait 1 second
 	}
-	return 0;
+
 }
