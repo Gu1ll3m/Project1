@@ -3,7 +3,7 @@
 #include <util/delay.h>
 
 void blink(void){
-	//comment
+	//comment for testing
 	DDRC = 0x01; // set LED pin as output
 	while(1){
 		PORTC = 0x00; // turn on LED (PC0 high)
