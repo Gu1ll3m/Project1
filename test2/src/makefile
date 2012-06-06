@@ -1,5 +1,6 @@
 
-SOURCES=main.c dxl_hal.c zgb_hal.c test.c manblink.c readbutton.c blinktimer.c gserialtest.c serial.c dynamixel.c zigbee.c
+SOURCES=main.c test.c manblink.c readbutton.c blinktimer.c gserialtest.c serial.c 
+#dynamixel.c zigbee.c dxl_hal.c zgb_hal.c 
 
 local:
 	#gcc -std=gnu99 -Wall $(SOURCES) -I ../include -lm -o Mycontroller.exe
@@ -10,3 +11,4 @@ local:
 	avr-size -C --mcu=atmega2561 main.elf
 clean: 
 	rm -f *.o *.out *.gch *.a *.hex *.elf *.exe
+	
