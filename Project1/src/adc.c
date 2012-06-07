@@ -18,31 +18,29 @@ void adc_init(void){
 	DDRA  = 0xFC;
 	PORTA = 0xFC;
 
-	sei();
-
 	ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);	// ADC Enable, Clock 1/64div.
 	return 0;
 }
 
 int adc(int a){
-	    ADMUX = a; // ADC Port  Select
+	    ADMUX = a;                      // ADC Port  Select
 	    switch(a) {
-			case1:
+			case 1:
 				PORTA &= ~0x80;			// ADC Port 1 IR ON
 				break;
-			case2:
+			case 2:
 				PORTA &= ~0x40;			// ADC Port 2 IR ON
 				break;
-			case3:
+			case 3:
 				PORTA &= ~0x20;			// ADC Port 3 IR ON
 				break;
-			case4:
+			case 4:
 				PORTA &= ~0x10;			// ADC Port 4 IR ON
 				break;
-			case5:
+			case 5:
 				PORTA &= ~0x08;			// ADC Port 5 IR ON
 				break;
-			case6:
+			case 6:
 				PORTA &= ~0x04;			// ADC Port 6 IR ON
 				break;
 	    }
