@@ -26,10 +26,7 @@
 #include "adc.h"
 #include "button.h"
 //#include "led.h"
-//#include "irlong.h"
-//#include "irshort.h"
-//#include "touch.h"
-//#include "gyro.h"
+//#include "sensor.h"
 //#include "motor.h"
 
 

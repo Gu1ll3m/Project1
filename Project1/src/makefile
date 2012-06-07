@@ -1,6 +1,6 @@
 
 SOURCES=main.c serial.c adc.c button.c
-# led.c  adc.c irlong.c irshort.c touch.c gyro.c motor.c
+# led.c sensor.c motor.c
 #dynamixel.c zigbee.c dxl_hal.c zgb_hal.c 
 
 local:
