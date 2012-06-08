@@ -14,12 +14,12 @@
  * After the ADC conversion, the Port is switched off, and we return the value of the ADC.
  *
  */
-void adc_init(void){
-	DDRA  = 0xFC;
-	PORTA = 0xFC;
+int adc_init(void){
+	DDRA  = 0xFC; // IR pins set to output
+	PORTA = 0xFC; // All IR pins disabled
 
 	ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);	// ADC Enable, Clock 1/64div.
-	return 0;
+	return 1;
 }
 
 int adc(int a){

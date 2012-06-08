@@ -5,6 +5,7 @@
 
 #include "zgb_hal.h"
 
+
 #define MAXNUM_ZGBBUFF	256
 
 volatile unsigned char gbZgbBuffer[MAXNUM_ZGBBUFF] = {0};
@@ -153,3 +154,4 @@ SIGNAL(USART1_RX_vect)
 {
 	zgb_hal_put_queue( UDR1 );
 }
+

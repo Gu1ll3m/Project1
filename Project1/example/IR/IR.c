@@ -27,7 +27,7 @@ int main(void)
 	sei();
 
 	ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);	// ADC Enable, Clock 1/64div.
-	ADMUX = ADC_PORT_1;										// ADC Port 1 Select
+	ADMUX = ADC_PORT_1;									// ADC Port 1 Select
 
 	printf( "\n\nIR example for CM-510\n\n" );
 

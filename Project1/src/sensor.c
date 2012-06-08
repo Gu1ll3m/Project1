@@ -1,59 +1,67 @@
+#define F_CPU 16000000UL // CM-510 runs at 16 MHz.
 
-//Headers missing
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
+#include "serial.h"
+#include "zigbee.h"
+#include "robot.h"
+#include "sensor.h"
+#include "adc.h"
 
+// Inicialize time interrupts used to sense
+int timeint_init(void){
 
-/* Initialize all sensors connected to the micro controller
- *
- * config is an array [] with bits showing sensor connected in port i
- * 0 -- noting connected
- * 1 -- IR sensor
- * 2 -- dms sensor
- * 3 -- Touch sensor
- * 4 -- Gyro sensor
- * 5 -- zigbee
- *
- * example
- * config=[1,1,2,0,0,0]
- *
- */
+	TCCR1B = (1<<CS12);     //256 Prescaler
+	//(1<<CS11)|(1<<CS10); 	//64 Prescaler
 
-bool init_sensors (config){
-   //inicialize all the ports
-	int i
-	i=1;
-	for(i=1;i<7;i++){
-		switch(config(i)){
-		    case0:   // Do nothing
+	OCR1A = 1240; // high freq for IR and DMS
+	//OCR1B = 5000; // middle freq for Touch
+	//OCR1C = 10000;// low freq for gyro
+
+	TIMSK1 = (1<<OCIE1A);                      //Enable Output Compare Match Interrupt
+	//TIMSK1 = (1<<OCIE1A)|(1<<OCIE1B)|(1<<OCIE1C);
+	TCNT1 = 0; 							          //reset timer/counter 1
+
+	return 1;
+}
+
+/*--------------------------------------------------------------------
+int zigbee_init(){
+
+	PORTD &= ~0x80;	//PORT_LINK_PLUGIN = 0;   // no pull up
+	PORTD &= ~0x20;	//PORT_ENABLE_RXD_LINK_PC = 0;
+	PORTD |= 0x40;	//PORT_ENABLE_RXD_LINK_ZIGBEE = 1;
+
+	zgb_initialize( 0 ); // Not using device index
+	return 1;
+}
+*/
+
+/*--------------------------------------------------------------------
+// Initialize the ports for all sensors connected to the micro controller
+// Possible pecific initializations depending on type of sensor
+void init_sensors (CONFIG){
+
+	for( i=0; i<=5; i++){         // i = port
+		switch( CONFIG(i) ){      // CONFIG(i) = type
+		    case 0:   // Do nothing
+
 		    	break;
-			case1:   // initialize IR
+			case 1:   // initialize IR
+
 				break;
-			case2:   // initialize dms
+			case 2:   // initialize dms
+
 				break;
-			case3:   // initialize touch
+			case 3:   // initialize touch
+
 				break;
-			case4:   // initialize gyro
+			case 4:   // initialize gyro
+
 				break;
-			case5:   // initialize zigbee
-				break:
 		}
 	}
 }
+*/
 
-/*
- * The "sensor" is the one to start sensing at the desired frequency "freq",
- * with an independent time interrupt for each sensor
- */
-bool start_sensing (config, sensor, freq){
-
-	switch(sensor){
-	case1:
-	}
-}
-
-/*
- * The "sensor" is stoped
- */
-bool stop_sensing (config, sensor){
-
-}

@@ -1,7 +1,7 @@
 
-SOURCES=main.c serial.c adc.c button.c
-# led.c sensor.c motor.c
-#dynamixel.c zigbee.c dxl_hal.c zgb_hal.c 
+SOURCES = main.c  motor.c adc.c button.c dxl_hal.c dynamixel.c led.c robot.c sensor.c serial.c
+# zigbee.c zgb_hal.c 
+# main_motor.c
 
 local:
     # To compile

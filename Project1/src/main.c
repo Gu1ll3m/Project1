@@ -8,48 +8,37 @@
  ============================================================================
  */
 
+// System API
 #include <stdio.h>
 #include <stdlib.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
-
 // Robitis API
-#include "serial.h"
+//#include "serial.h"
 //#include "zigbee.h"
 //#include "zgb_hal.h"
 //#include "dynamixel.h"
 //#include "dxl_hal.h"
 
 // OUR API
+#include "robot.h"    //All the robot initializations
 #include "adc.h"
 #include "button.h"
 //#include "led.h"
 //#include "sensor.h"
 //#include "motor.h"
 
+#define F_CPU 16000000UL // CM-510 runs at 16 MHz.
 
-int main(void) {
-	int value, butt;
-	unsigned char Data;
+int main(void){
 
-	serial_initialize(57600);				// USART Initialize
-	adc_init();
+	robot_init();
 
 	while(1){
-		butt = readbutton(4);
-		Data = readkey();
-
-		if(Data == 'u'){
-			value = adc(2);
-			printf("%d\r\n", value);
-		}
-		else if(Data == 'd'){
-			printf("Hello");
-		}
-
-		_delay_ms(500);
+		robot_actuate();
 	}
+	robot_destroy();
 	return 0;
 }

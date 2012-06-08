@@ -14,10 +14,10 @@ void blinktimer() {
 	TCCR1B = (1<<CS12);//|(1<<CS10); 	//256 Prescaler
 	OCR1A = 1240;
 	OCR1B = 5000;
-	OCR1C = 10000,
+	OCR1C = 10000;
 	TIMSK1 = (1<<OCIE1A)|(1<<OCIE1B)|(1<<OCIE1C);//Enable Output Compare Match Interrupt
-	TCNT1 = 0; 							//reset timer/counter 1
-	sei(); 								//Enables global interrupts
+	TCNT1 = 0; 							         //reset timer/counter 1
+	sei(); 								         //Enables global interrupts
 	while(1) {}
 }
 

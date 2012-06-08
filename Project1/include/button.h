@@ -9,6 +9,6 @@
 #define BUTTON_H_
 
 int readbutton(int pin);
-unsigned char readkey();
+unsigned char readkey(void);
 
 #endif /* BUTTON_H_ */
