@@ -9,11 +9,11 @@
  */
 
 // System API
-#include <stdio.h>
-#include <stdlib.h>
-#include <avr/interrupt.h>
-#include <avr/io.h>
-#include <util/delay.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <avr/interrupt.h>
+//#include <avr/io.h>
+//#include <util/delay.h>
 
 // Robitis API
 //#include "serial.h"
@@ -24,13 +24,13 @@
 
 // OUR API
 #include "robot.h"    //All the robot initializations
-#include "adc.h"
-#include "button.h"
+//#include "adc.h"
+//#include "button.h"
 //#include "led.h"
 //#include "sensor.h"
 //#include "motor.h"
 
-#define F_CPU 16000000UL // CM-510 runs at 16 MHz.
+//#define F_CPU 16000000UL // CM-510 runs at 16 MHz.
 
 int main(void){
 

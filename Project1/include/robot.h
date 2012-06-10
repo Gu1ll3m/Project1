@@ -18,9 +18,15 @@
 
 
 // Methods
+int robot_sensor(int s);
+void robot_sense(int s);
 void robot_init(void);
 void robot_actuate(void);
+void robot_followl(void);
+void robot_followr(void);
+void robot_corridor(void);
 void robot_destroy(void);
+
 
 
 #endif /* ROBOT_H_ */

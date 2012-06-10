@@ -1,13 +1,14 @@
-
+#include <math.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "adc.h"
 #include "sensor.h"
 #include "serial.h"
-#include "robot.h"
-#include <math.h>
+//#include "robot.h"      Sure we need to include it??
 //#include "zigbee.h"
 #include "led.h"
 #include "motor.h"
@@ -33,14 +34,6 @@ int CONFIG[6] = {1,0,1,1,0,0};
 int farl = 0;
 int farr = 0;
 
-int robot_sensor(int s){
-	return sensordata[s];
-}
-
-void robot_sense(int s){
-	sensordata[s] = adc(s+1);
-}
-
 void robot_init(void){
 
 	serial_initialize(57600);	             // USART Initialize
@@ -49,7 +42,7 @@ void robot_init(void){
 
 	if ( timeint_init() ){}
 	else{
-		printf("error initializing time interrupt");
+		printf("error initializing time interrupt \n");
 	}
 
 	// initialize zigbee
@@ -69,14 +62,58 @@ void robot_init(void){
 	// initializing ADC converters (after init_sensor)
 	if ( adc_init() ){}
 	else{
-		printf("error initializing adc");
+		printf("error initializing adc \n");
 	}
 
 	//leds_init
     //motors_init
 }
-
 /*------------------------------------------------------------------*/
+int robot_sensor(int s){
+	return sensordata[s];
+}
+/*------------------------------------------------------------------*/
+void robot_sense(int s){
+	sensordata[s] = adc(s+1);
+}
+/*------------------------------------------------------------------*/
+// Wall following behaviours
+void robot_followl(void){
+	if (robot_sensor(IR_LEFT)>CLOSE){
+	    	motor_turnr();
+	    }
+	    else if(robot_sensor(IR_LEFT)<FAR){
+	    	motor_turnl();
+	    }
+	    else{
+	    	motor_fwd_slow();
+	    }
+}
+/*--------------------------------------------------------------------*/
+void robot_followr(void){
+	if (robot_sensor(IR_RIGHT)>CLOSE){
+	    	motor_turnl();
+	    }
+	    else if(robot_sensor(IR_RIGHT)<FAR){
+	    	motor_turnr();
+	    }
+	    else{
+	    	motor_fwd_slow();
+	    }
+}
+/*--------------------------------------------------------------------*/
+void robot_corridor(void){
+	if ((robot_sensor(IR_RIGHT)-robot_sensor(IR_LEFT))>DIFF){
+	    	motor_turnl();
+	    }
+	    else if((robot_sensor(IR_RIGHT)-robot_sensor(IR_LEFT))>DIFF){
+	    	motor_turnr();
+	    }
+	    else{
+	    	motor_fwd_slow();
+	    }
+}
+/*--------------------------------------------------------------------*/
 void robot_actuate(void){
 	//The program
 	int i;
@@ -108,52 +145,11 @@ void robot_actuate(void){
 
 	_delay_ms(1000);
 }
-
-/*--------------------------------------------------------------------*/
-// Wall following behaviours
-void robot_followl(void){
-	if (robot_sensor(IR_LEFT)>CLOSE){
-	    	motor_turnr();
-	    }
-	    else if(robot_sensor(IR_LEFT)<FAR){
-	    	motor_turnl();
-	    }
-	    else{
-	    	motor_fwd_slow();
-	    }
-}
-
-void robot_followr(void){
-	if (robot_sensor(IR_RIGHT)>CLOSE){
-	    	motor_turnl();
-	    }
-	    else if(robot_sensor(IR_RIGHT)<FAR){
-	    	motor_turnr();
-	    }
-	    else{
-	    	motor_fwd_slow();
-	    }
-}
-
-void robot_corridor(void){
-	if ((robot_sensor(IR_RIGHT)-robot_sensor(IR_LEFT))>DIFF){
-	    	motor_turnl();
-	    }
-	    else if((robot_sensor(IR_RIGHT)-robot_sensor(IR_LEFT))>DIFF){
-	    	motor_turnr();
-	    }
-	    else{
-	    	motor_fwd_slow();
-	    }
-}
-
 /*------------------------------------------------------------------*/
 void robot_destroy(void){
 	//void zgb_terminate(void);
 	//void dxl_terminate();
 }
-
-
 /*--------------------------------------------------------------------*/
 // Interruptions
 

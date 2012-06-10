@@ -28,7 +28,7 @@ void motor_speed(int id, int speed);
 void motor_pos(int id, unsigned short pos);
 int motor_check_stop(int id);
 int motor_check_pos(int id);
-int motor_received();
+int motor_received(void);
 void motor_stop(void);
 void motor_fwd_slow(void);
 void motor_bwd_slow(void);

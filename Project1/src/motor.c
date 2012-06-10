@@ -54,7 +54,7 @@ void motor_wheel_init(int id, int initspeed){
 	dxl_write_word( id, P_CCW_ANGLE_LIMIT_H, 0 );
 	dxl_write_word( id, P_SPEED, initspeed );
 
-	return 0;
+	//return 0;
 }
 
 /* Initialize motor in joint mode setting the angle limit and initial position*/
@@ -62,7 +62,7 @@ void motor_joint_init(int id, int anglim, unsigned short initpos){
 	dxl_write_word( id, P_CCW_ANGLE_LIMIT_L, anglim );
 	dxl_write_word( id, P_GOAL_POSITION_L, initpos );
 
-	return 0;
+	//return 0;
 }
 
 /* Change the speed of the motor
@@ -79,6 +79,14 @@ void motor_speed(int id, int speed){
 void motor_pos(int id, unsigned short pos){
 	dxl_write_word( id, P_GOAL_POSITION_L, pos );
 }
+
+/* Check if communication is correctly received from motor*/
+int motor_received(void){
+	int com;
+	com = dxl_get_result();
+	return  com == COMM_RXSUCCESS;
+}
+
 
 /* Check if motor is stopped (has reached goal position)
  * Returns true if stopped, false if moving and -1 if communication failed
@@ -99,13 +107,6 @@ int motor_check_pos(int id){
 	int pos;
 	pos = dxl_read_word( id, P_PRESENT_POSITION_L );
 	return pos;
-}
-
-/* Check if communication is correctly received from motor*/
-int motor_received(){
-	int com;
-	com = dxl_get_result();
-	return  com == COMM_RXSUCCESS;
 }
 
 void motor_stop(void){
